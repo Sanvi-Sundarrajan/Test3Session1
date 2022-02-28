@@ -1,1 +1,115 @@
+//debuglog
+Reading symbols from a.out...
+(gdb) run
+Starting program: /home/a.out 
 
+Breakpoint 1, main () at main.c:42
+42        input(&num1,&den1,&num2,&den2);
+(gdb) step
+input (num1=0x7fffffffebb7, den1=0xc2, num2=0xf0b5ff, den2=0x555555554040)
+    at main.c:12
+12      {
+(gdb) next
+13          printf("Enter the numerator and denominator for 1st number  \n");
+(gdb) next
+Enter the numerator and denominator for 1st number  
+14          scanf("%d%d",num1,den1);
+(gdb) next
+1 4 
+15          printf("Enter the numerator and denominator for 2nd number  \n ");
+(gdb) next
+Enter the numerator and denominator for 2nd number  
+16          scanf("%d%d",num2,den2);
+(gdb) step
+__isoc99_scanf (format=0x55555555603d "%d%d") at isoc99_scanf.c:25
+25      isoc99_scanf.c: No such file or directory.
+(gdb) next
+29      in isoc99_scanf.c
+(gdb) next
+30      in isoc99_scanf.c
+(gdb) next
+ 1 2
+33      in isoc99_scanf.c
+(gdb) next
+input (num1=0x7fffffffebac, den1=0x7fffffffebb8, num2=0x7fffffffebb0, 
+    den2=0x7fffffffebbc) at main.c:17
+17      }
+(gdb) next
+main () at main.c:43
+43        add(num1,den1,num2,den2,&num3,&den3);
+(gdb) step
+add (num1=32767, den1=-5204, num2=32767, den2=-5192, num3=0x7fffffffebb0, 
+    den3=0x7fffffffebbc) at main.c:19
+19      {
+(gdb) next
+20        *num3=(num1*den2)+(den1*num2);
+(gdb) next
+21        *den3=den1*den2;
+(gdb) p *num3
+$1 = 6
+(gdb) next
+22      }
+(gdb) p *den3
+$2 = 8
+(gdb) next
+main () at main.c:44
+44        int gcd_no=gcd(num3,den3);
+(gdb) step
+gcd (num3=32767, den3=-5196) at main.c:24
+24      {
+(gdb) next
+25        int gcd=1;
+(gdb) next
+26        while(den3!=0)
+(gdb) next
+28          gcd=num3%den3;
+(gdb) next
+29          num3=den3;
+(gdb) next
+30          den3=gcd;
+(gdb) next
+26        while(den3!=0)
+(gdb) p num3
+$3 = 8
+(gdb) next
+28          gcd=num3%den3;
+(gdb) next
+29          num3=den3;
+(gdb) next
+30          den3=gcd;
+(gdb) next
+26        while(den3!=0)
+(gdb) p num3
+$4 = 6
+(gdb) next
+28          gcd=num3%den3;
+(gdb) next
+29          num3=den3;
+(gdb) next
+30          den3=gcd;
+(gdb) next
+26        while(den3!=0)
+(gdb) p num3
+$5 = 2
+(gdb) next
+32        return num3;
+(gdb) next
+33      }
+(gdb) next
+main () at main.c:45
+45        output(num1,den1,num2,den2,num3,den3,gcd_no);
+(gdb) step
+output (num1=2, den1=0, num2=32767, den2=-5184, num3=21845, den3=1431654938, 
+    gcd_no=2) at main.c:35
+35      {
+(gdb) next
+36       printf("(%d / %d) + (%d / %d) = (%d / %d)", num1, den1, num2, den2, num3/gcd_no, den3/gcd_no);
+(gdb) next
+38      }
+(gdb) next
+main () at main.c:46
+46        return 0;
+(gdb) continue
+Continuing.
+(1 / 4) + (1 / 2) = (3 / 4)[Inferior 1 (process 1522) exited normally]
+(gdb) 
